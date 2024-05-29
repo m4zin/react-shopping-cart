@@ -4,20 +4,19 @@ import { ContextType, objArray } from "../types";
 function ItemInCart({ title, price, count, imgUrl, removeItem, increment, decrement }
     : { title: string, price: number, count: number, imgUrl: string, removeItem: () => void, increment: () => void, decrement: () => void }) {
     return (
-        <div className="flex h-fit w-full shadow-sm">
-            <div className="h-full w-[15%]">
+        <div className="flex-col flex md:flex-row lg:flex-row h-fit w-full shadow-sm">
+            <div className="h-full w-full md:w-[15%] lg:w-[15%]">
                 <img src={imgUrl} className="h-full w-full" alt="" />
             </div>
             <div className="flex flex-col justify-evenly h-full w-full p-3 bg-gray-200">
                 <p className="text-lg">{title}</p>
                 <p>{`${count} * ${price} = ${count * price}`}</p>
-                {/* <p>{`Quantity: ${count}`}</p> */}
                 <div className="flex items-center gap-3">
                     <p>Quantity: </p>
                     <div className="flex items-center max-w-[7rem]">
                         <button onClick={decrement} type="button" id="decrement-button" data-input-counter-decrement="quantity-input" className="bg-blue-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-8 w-16 flex items-center justify-center focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                             <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
                             </svg>
                         </button>
                         <p id="quantity-input" data-input-counter aria-describedby="helper-text-explanation" className="bg-blue-700 border-x-0 border-gray-300 h-8 w-20 text-center text-md flex items-center justify-center dark:border-gray-600 dark:placeholder-gray-400 text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -25,7 +24,7 @@ function ItemInCart({ title, price, count, imgUrl, removeItem, increment, decrem
                         </p>
                         <button onClick={increment} type="button" id="increment-button" data-input-counter-increment="quantity-input" className="bg-blue-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-8 w-16 flex items-center justify-center focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                             <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16" />
                             </svg>
                         </button>
                     </div>
@@ -85,7 +84,7 @@ export default function Cart() {
 
     return (
         <div className="flex flex-col gap-3 items-center justify-center h-[90%] w-full">
-            <div className="flex h-[75%] w-[60%] shadow-lg border-2 border-blue-700 rounded-lg">
+            <div className="flex w-[90%] h-[75%] lg:w-[60%] md:w-[60%] shadow-lg border-4 border-blue-700 rounded-lg">
                 <div className="flex overflow-y-auto flex-col gap-5 p-10 h-full w-full bg-white">
                     {
                         cartItems.length === 0 &&
@@ -97,7 +96,7 @@ export default function Cart() {
                         cartItems !== null &&
                         cartItems.map((item) => {
                             return (
-                                <>
+                                <div key={item.id}>
                                     <ItemInCart
                                         title={item.title}
                                         price={item.price}
@@ -108,7 +107,8 @@ export default function Cart() {
                                         decrement={() => decrement(item.id)}
                                     >
                                     </ItemInCart>
-                                </>
+                                </div>
+
                             )
                         })
                     }
