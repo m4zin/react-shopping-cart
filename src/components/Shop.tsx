@@ -16,9 +16,8 @@ function Item({ id, imgUrl, title, price }: { id: number, imgUrl: string, title:
         setCount(count => count + 1)
     }
 
-    function placeInCart() {
+    function addToCart() {
         const item = { id: id, count: count, title: title, price: price, imgUrl: imgUrl };
-    
         const itemIndex = cartItems.findIndex(cartItem => cartItem.id === id);
     
         if (itemIndex !== -1) {
@@ -38,7 +37,7 @@ function Item({ id, imgUrl, title, price }: { id: number, imgUrl: string, title:
     return (
         <div className="flex flex-col justify-center h-[500px] w-[350px] shadow-lg border-2 border-blue-700 rounded-lg">
             <div className="flex h-[65%] w-full justify-center items-center">
-                <img src={imgUrl} className="h-[100%] w-[100%]" />
+                <img src={imgUrl} className="h-[75%] w-[75%]" />
             </div>
             <div className="flex p-2 justify-center flex-col gap-1 h-[35%]">
                 <p className="truncate w-full text-lg">{title}</p>
@@ -56,7 +55,7 @@ function Item({ id, imgUrl, title, price }: { id: number, imgUrl: string, title:
                         </svg>
                     </button>
                 </div>
-                <button onClick={placeInCart} className="max-w-[7rem] border-1 p-2 bg-yellow-400 text-black rounded-lg">Add to cart</button>
+                <button onClick={addToCart} className="max-w-[7rem] border-1 p-2 bg-yellow-400 text-black rounded-lg">Add to cart</button>
             </div>
         </div>
     )
@@ -71,7 +70,7 @@ export default function Shop() {
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch('https://api.escuelajs.co/api/v1/categories/4/products')
+                const response = await fetch('https://fakestoreapi.com/products')
 
                 if (!response.ok) {
                     throw new Error("Server error")
@@ -84,7 +83,7 @@ export default function Shop() {
                             id: result[i].id,
                             title: result[i].title,
                             price: result[i].price,
-                            imgUrl: result[i].images[0]
+                            imgUrl: result[i].image
                         })
                     }
 
