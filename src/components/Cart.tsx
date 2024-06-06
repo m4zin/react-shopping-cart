@@ -4,8 +4,8 @@ import { ContextType, objArray } from "../types";
 function ItemInCart({ title, price, count, imgUrl, removeItem, increment, decrement }
     : { title: string, price: number, count: number, imgUrl: string, removeItem: () => void, increment: () => void, decrement: () => void }) {
     return (
-        <div className="flex-col flex md:flex-row lg:flex-row h-fit w-full shadow-sm">
-            <div className="h-full w-full md:w-[15%] lg:w-[15%]">
+        <div className="flex-col flex h-fit items-center md:flex-row lg:flex-row md:h-[150px] lg:h-[150px] w-full shadow-sm">
+            <div className="h-full p-3 w-[100px] md:w-[15%] lg:w-[15%]">
                 <img src={imgUrl} className="h-full w-full" alt="" />
             </div>
             <div className="flex flex-col justify-evenly h-full w-full p-3 bg-gray-200">
